@@ -1,0 +1,141 @@
+@extends('panel.layout.index')
+@section('content')
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Painel Produtos</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="#">Painel</a>
+                        </li>
+                        <li class="breadcrumb-item active">Produtos</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+	<hr>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Listagem de Produtos</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>Nome</th>
+                                        <th>Slug</th>
+                                        <th>Preço</th>
+                                        <th>Criação</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach ($products as $prod)
+
+                                        <tr>
+                                            
+                                            <td>{{ $prod->name }}</td>
+                                            <td>{{ $prod->slug }}</td>
+                                            <td>{{ $prod->price }}</td>
+                                            <td>{{ $prod->created_at->diffForHumans() }}</td>
+                                            <td>
+                                                <a href="#" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                <a href="#" class="btn btn-sm btn-outline-danger">Apagar</a>
+                                            </td>
+                                        </tr>
+
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    <div class="modal fade" id="modal-novo-usuario">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Adicionar novo Usuário</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/teofaniamotobike/public/usuarios/store" method="POST">
+                                        {{ csrf_field() }}
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Nome do Usuário"
+                                                name="nome" id="nome">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                            </div>
+                                            <input type="email" class="form-control" placeholder="Email" name="email"
+                                                id="email" required>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                            </div>
+                                            <input type="password" class="form-control" placeholder="Senha" name="senha"
+                                                id="senha" required>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="fas fa-chalkboard-teacher"></i></span>
+                                            </div>
+                                            <select name="tipo" class="form-control">
+                                                <option value="1">Selecionar....</option>
+                                                <option value="1">Administrador</option>
+                                                <option value="2">Balcão</option>
+                                                <option value="3">Caixa</option>
+                                            </select>
+                                        </div>
+
+
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="cancel" class="btn btn-outline-secondary"
+                                                data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-outline-success">Salvar
+                                                Informações</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+@endsection
